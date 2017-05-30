@@ -2,4 +2,29 @@
     <string name="app_name">TheMovieApp</string>
     <string name="search_title">Search title</string>
     <string name="search_hint">Search Movies..</string>
+    <string name="action_id">28</string>
+    <string name="adventure_id">12</string>
+    <string name="animation_id">16</string>
+    <string name="comedy_id">35</string>
+    <string name="crime_id">80</string>
+    <string name="documentary_id">99</string>
+    <string name="drama_id">18</string>
+    <string name="family_id">10751</string>
+    <string name="fantasy_id">14</string>
+    <string name="history_id">36</string>
+    <string name="horror_id">27</string>
+    <string name="music_id">10402</string>
+    <string name="mystery_id">9648</string>
+    <string name="romance_id">10479</string>
+    <string name="science_fiction">878</string>
+    <string name="tv_movie_id">10770</string>
+    <string name="thriller_id">53</string>
+    <string name="war_id">10752</string>
+    <string name="western_id">37</string>
+
+
+
+
+
+
 </resources>

@@ -2,35 +2,133 @@ package com.example.pagerank.themovieapp;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
+import com.example.pagerank.themovieapp.model.GenreType;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String TAG="Mainactivity";
+
+    ArrayList<GenreType> listOfGenre;
+    RecyclerView recyclerView;
+    FloatingSearchView mSearchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        listOfGenre = GenreType.getArrayList();
+        recyclerView = (RecyclerView) findViewById(R.id.rv_genrelist);
+        GenreListAdapter adapter=new GenreListAdapter();
+        LinearLayoutManager manager=new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+
+        mSearchView= (FloatingSearchView) findViewById(R.id.floating_search_view);
+        mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, final String newQuery) {
+
+                //get suggestions based on newQuery
+
+                //pass them on to the search view
+//                mSearchView.swapSuggestions(newSuggestions);
+            }
+        });
+
+        mSearchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
+            @Override
+            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+
+            }
+
+            @Override
+            public void onSearchAction(String currentQuery) {
+                Toast.makeText(MainActivity.this, "SEARCH BUTTON PRESSED", Toast.LENGTH_SHORT).show();
+                mSearchView.clearQuery();
+            }
+        });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main,menu);
 
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.search).getActionView();
-        Log.d(TAG, "onCreateOptionsMenu: "+searchView);
+    public class GenreViewHolder extends RecyclerView.ViewHolder {
+
+        public GenreViewHolder(View itemView) {
+            super(itemView);
+        }
+        LinearLayout linearLayout;
+        TextView tv;
+
+    }
+
+    public class GenreListAdapter extends RecyclerView.Adapter<GenreViewHolder> {
+
+        @Override
+        public GenreViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater li = getLayoutInflater();
+            View convertView = li.inflate(R.layout.layout_list_item, parent, false);
+            GenreViewHolder gnv = new GenreViewHolder(convertView);
+            gnv.tv = (TextView) convertView.findViewById(R.id.tv_genre);
+            gnv.linearLayout= (LinearLayout) convertView.findViewById(R.id.layout_linear_item);
+            return gnv;
+
+        }
+
+        @Override
+        public void onBindViewHolder(GenreViewHolder holder, int position) {
+            int pos = position;
+            GenreType genreType = listOfGenre.get(pos);
+            holder.tv.setText(genreType.getName());
+            Drawable drawablePic = getResources().getDrawable(genreType.getImageId());
+//            drawablePic.setColorFilter(0x76ffffff, PorterDuff.Mode.SRC_OVER;
+            holder.linearLayout.setBackground(drawablePic);
+
+
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return listOfGenre.size();
+        }
+    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_main, menu);
+//
+//        SearchManager searchManager =
+//                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        SearchView searchView =
+//                (SearchView) menu.findItem(R.id.search).getActionView();
 //        searchView.setSearchableInfo(
 //                searchManager.getSearchableInfo(getComponentName()));
-
-
-        return true;
-    }
+//
+//
+//        return true;
+//    }
 }
