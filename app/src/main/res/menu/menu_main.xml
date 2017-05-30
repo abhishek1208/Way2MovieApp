@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.the_dagger.picassodemo.MainActivity">
+    <item
+        android:id="@+id/action_popular"
+        android:icon="@drawable/ic_popular"
+        android:orderInCategory="100"
+        android:title="Popular"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_top_rated"
+        android:icon="@drawable/ic_top_rated"
+        android:orderInCategory="200"
+        android:title="Top Rated"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@drawable/ic_action_search"
+        android:title="@string/search_title"
+        app:showAsAction="ifRoom|collapseActionView" />
+</menu>
