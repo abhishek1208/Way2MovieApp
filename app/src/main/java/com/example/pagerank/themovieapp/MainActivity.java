@@ -2,6 +2,7 @@ package com.example.pagerank.themovieapp;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listOfGenre = GenreType.getArrayList();
+        listOfGenre = GenreType.getArrayList(MainActivity.this);
         recyclerView = (RecyclerView) findViewById(R.id.rv_genrelist);
         GenreListAdapter adapter=new GenreListAdapter();
         LinearLayoutManager manager=new LinearLayoutManager(this);
@@ -100,11 +102,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(GenreViewHolder holder, int position) {
             int pos = position;
-            GenreType genreType = listOfGenre.get(pos);
+            final GenreType genreType = listOfGenre.get(pos);
             holder.tv.setText(genreType.getName());
             Drawable drawablePic = getResources().getDrawable(genreType.getImageId());
 //            drawablePic.setColorFilter(0x76ffffff, PorterDuff.Mode.SRC_OVER;
             holder.linearLayout.setBackground(drawablePic);
+            holder.tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i=new Intent(MainActivity.this,GenreMovieList.class);
+                    Log.d("idcheck", "onClick: "+genreType.getId());
+                    i.putExtra("idOfGenre",genreType.getId());
+                    startActivity(i);
+
+                }
+            });
 
 
 

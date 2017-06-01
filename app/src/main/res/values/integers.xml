@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="action_id">28</integer>
+    <integer name="adventure_id">12</integer>
+    <integer name="animation_id">16</integer>
+    <integer name="comedy_id">35</integer>
+    <integer name="crime_id">80</integer>
+    <integer name="documentary_id">99</integer>
+    <integer name="drama_id">18</integer>
+    <integer name="family_id">10751</integer>
+    <integer name="fantasy_id">14</integer>
+    <integer name="history_id">36</integer>
+    <integer name="horror_id">27</integer>
+    <integer name="music_id">10402</integer>
+    <integer name="mystery_id">9648</integer>
+    <integer name="romance_id">10479</integer>
+    <integer name="science_fiction">878</integer>
+    <integer name="tv_movie_id">10770</integer>
+    <integer name="thriller_id">53</integer>
+    <integer name="war_id">10752</integer>
+    <integer name="western_id">37</integer>
+
+
+</resources>

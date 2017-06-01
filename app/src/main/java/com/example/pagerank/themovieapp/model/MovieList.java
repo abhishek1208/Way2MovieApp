@@ -20,6 +20,12 @@ public class MovieList {
 
         private String title;
 
+        private String id;
+
+        public String getId() {
+            return id;
+        }
+
         public String getPoster_path() {
             return "http://image.tmdb.org/t/p/w500/" + poster_path;
         }
