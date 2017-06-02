@@ -11,7 +11,7 @@
         android:id="@+id/floating_search_view"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        app:floatingSearch_searchHint="Search..."
+        app:floatingSearch_searchHint="Search Movies.."
         app:floatingSearch_suggestionsListAnimDuration="250"
         app:floatingSearch_showSearchKey="true"
         app:floatingSearch_leftActionMode="showHamburger"

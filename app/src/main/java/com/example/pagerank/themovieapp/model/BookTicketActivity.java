@@ -19,7 +19,7 @@ public class BookTicketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityBookTicketBinding binding= DataBindingUtil.setContentView(this, R.layout.activity_book_ticket);
-        User user = new User("","","","","",0);
+        User user = new User();
         final Validator validator = new Validator(binding);
         binding.setUser(user);
         submit= (Button) findViewById(R.id.btn_submit);
@@ -28,6 +28,7 @@ public class BookTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(validator.validate()){
                     Toast.makeText(BookTicketActivity.this, "Submitted!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
 
             }

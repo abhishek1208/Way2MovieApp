@@ -16,55 +16,59 @@
         android:text="Name :"
         />
     <EditText
+        app:validateEmpty="@{true}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{user.name}"/>
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email :"
-        />
+        android:text="Email id "/>
     <EditText
+        app:validateEmpty="@{true}"
+        app:validateType='@{"email"}'
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{user.email}"/>
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="House No. "/>
     <EditText
+        app:validateEmpty="@{true}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{user.address}"/>
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pincode"/>
     <EditText
-        android:text="@{user.pincode}"
+        app:validateEmpty="@{true}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
         android:text="City"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:text="@{user.city}"
+        app:validateEmpty="@{true}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
-        android:text="Number of tickets"
+        android:text="Number Of Tickets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
-        android:text="@{user.numOfTickets}"
+        app:validateEmpty="@{true}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:text="Submit!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_submit"
-        android:text="Submit!"/>
+        android:id="@+id/btn_submit"/>
 
 
 </LinearLayout>
