@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.example.pagerank.themovieapp.model.GenreType;
+import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<GenreType> listOfGenre;
     RecyclerView recyclerView;
     FloatingSearchView mSearchView;
+    public static final String TAG = "Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listOfGenre = GenreType.getArrayList(MainActivity.this);
         recyclerView = (RecyclerView) findViewById(R.id.rv_genrelist);
-        GenreListAdapter adapter=new GenreListAdapter();
-        LinearLayoutManager manager=new LinearLayoutManager(this);
+        GenreListAdapter adapter = new GenreListAdapter();
+        LinearLayoutManager manager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        mSearchView= (FloatingSearchView) findViewById(R.id.floating_search_view);
+        mSearchView = (FloatingSearchView) findViewById(R.id.floating_search_view);
         mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
             @Override
             public void onSearchTextChanged(String oldQuery, final String newQuery) {
@@ -73,6 +76,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        mSearchView.setOnMenuItemClickListener(new FloatingSearchView.OnMenuItemClickListener() {
+            @Override
+            public void onActionMenuItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.logout:
+                        LoginManager.getInstance().logOut();
+                        Log.d(TAG, "onOptionsItemSelected: " + "loggingout");
+                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(i);
+
+                }
+            }
+        });
+
     }
 
 
@@ -81,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         public GenreViewHolder(View itemView) {
             super(itemView);
         }
+
         LinearLayout linearLayout;
         TextView tv;
 
@@ -94,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             View convertView = li.inflate(R.layout.layout_list_item, parent, false);
             GenreViewHolder gnv = new GenreViewHolder(convertView);
             gnv.tv = (TextView) convertView.findViewById(R.id.tv_genre);
-            gnv.linearLayout= (LinearLayout) convertView.findViewById(R.id.layout_linear_item);
+            gnv.linearLayout = (LinearLayout) convertView.findViewById(R.id.layout_linear_item);
             return gnv;
 
         }
@@ -110,14 +129,13 @@ public class MainActivity extends AppCompatActivity {
             holder.tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i=new Intent(MainActivity.this,GenreMovieList.class);
-                    Log.d("idcheck", "onClick: "+genreType.getId());
-                    i.putExtra("idOfGenre",genreType.getId());
+                    Intent i = new Intent(MainActivity.this, GenreMovieList.class);
+                    Log.d("idcheck", "onClick: " + genreType.getId());
+                    i.putExtra("idOfGenre", genreType.getId());
                     startActivity(i);
 
                 }
             });
-
 
 
         }
@@ -128,19 +146,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_main, menu);
-//
-//        SearchManager searchManager =
-//                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView =
-//                (SearchView) menu.findItem(R.id.search).getActionView();
-//        searchView.setSearchableInfo(
-//                searchManager.getSearchableInfo(getComponentName()));
-//
-//
-//        return true;
-//    }
+
 }

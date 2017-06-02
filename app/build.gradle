@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -25,13 +28,17 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'io.realm:realm-android:0.82.1'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.github.arimorty:floatingsearchview:2.0.4'
     compile 'com.github.florent37:picassopalette:2.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.Ilhasoft:data-binding-validator:0.6.4'
     testCompile 'junit:junit:4.12'
 }

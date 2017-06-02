@@ -2,4 +2,8 @@
     <string name="app_name">TheMovieApp</string>
     <string name="search_title">Search title</string>
     <string name="search_hint">Search Movies..</string>
+    <string name="facebook_app_id">427270131006186</string>
+    <string name="fb_login_protocol_scheme">fb427270131006186</string>
+
+
 </resources>

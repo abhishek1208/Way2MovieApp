@@ -1,6 +1,7 @@
 package com.example.pagerank.themovieapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.pagerank.themovieapp.MovieDetailsPage;
 import com.example.pagerank.themovieapp.R;
 import com.example.pagerank.themovieapp.model.MovieList;
 import com.github.florent37.picassopalette.PicassoPalette;
@@ -46,13 +48,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         Picasso.with(context).setLoggingEnabled(true);
         Picasso.with(context).load(singleMovieList.get(position).getPoster_path()).fit().placeholder(R.mipmap.ic_placeholder)
                 .into(holder.posterImage, PicassoPalette.with(singleMovieList.get(position).getPoster_path(), holder.posterImage)
-                        .use(PicassoPalette.Profile.VIBRANT)
+                        .use(PicassoPalette.Profile.VIBRANT_LIGHT)
                         .intoBackground(holder.movieTitle)
                 );
         holder.viewCached.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,singleMovieList.get(position).getId()+"", Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(context, MovieDetailsPage.class);
+                i.putExtra("movie_id",singleMovieList.get(position).getId());
+                context.startActivity(i);
             }
         });
 
