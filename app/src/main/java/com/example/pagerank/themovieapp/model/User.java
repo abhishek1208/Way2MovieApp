@@ -12,6 +12,18 @@ public class User {
     private String city;
     private int numOfTickets;
 
+    public User() {
+    }
+
+    public User(String name, String email, String address, String pincode, String city, int numOfTickets) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.pincode = pincode;
+        this.city = city;
+        this.numOfTickets = numOfTickets;
+    }
+
     public String getName() {
         return name;
     }

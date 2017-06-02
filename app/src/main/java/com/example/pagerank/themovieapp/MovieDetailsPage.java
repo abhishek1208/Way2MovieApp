@@ -1,11 +1,13 @@
 package com.example.pagerank.themovieapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +16,7 @@ import com.example.pagerank.themovieapp.adapters.MovieListAdapter;
 import com.example.pagerank.themovieapp.api.APIService;
 import com.example.pagerank.themovieapp.db.models.FacebookUser;
 import com.example.pagerank.themovieapp.db.utils.FacebookUserFuns;
+import com.example.pagerank.themovieapp.model.BookTicketActivity;
 import com.example.pagerank.themovieapp.model.MovieItemDetails;
 import com.example.pagerank.themovieapp.model.MovieList;
 import com.facebook.AccessToken;
@@ -34,6 +37,7 @@ public class MovieDetailsPage extends AppCompatActivity {
     boolean checkForToggle;
     public static final String TAG = "MovieDetailsPage";
     String userId;
+    TextView btn_tickets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,15 @@ public class MovieDetailsPage extends AppCompatActivity {
         movie_id = getIntent().getStringExtra("movie_id");
         fetchMovieDetails(Integer.valueOf(movie_id));
         loginManager = LoginManager.getInstance();
+        btn_tickets= (TextView) findViewById(R.id.btn_book_tickets);
+
+        btn_tickets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MovieDetailsPage.this, BookTicketActivity.class);
+                startActivity(i);
+            }
+        });
         setLikeButton();
 
         like_btn.setOnClickListener(new View.OnClickListener() {

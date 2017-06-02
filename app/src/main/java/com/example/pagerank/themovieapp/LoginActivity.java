@@ -11,9 +11,11 @@ import android.widget.Toast;
 import com.example.pagerank.themovieapp.db.models.FacebookUser;
 import com.example.pagerank.themovieapp.db.models.RealmInteger;
 import com.example.pagerank.themovieapp.db.utils.FacebookUserFuns;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -34,11 +36,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if(isLoggedIn()){
+            Intent i=new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(i);
+            finish();
+        }
         realm=Realm.getDefaultInstance();
         loginButton = (LoginButton)findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         callbackManager = CallbackManager.Factory.create();
         guest= (Button) findViewById(R.id.btn_guest);
+
+
 
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,12 +77,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d("id check", "onSuccess: "+loginResult.getAccessToken().getUserId());
-
-
-
-
-//                Intent i=new Intent(LoginActivity.this,MainActivity.class);
-//                startActivity(i);
+                FacebookUserFuns.addUser(loginResult.getAccessToken().getUserId());
+                Intent i=new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(i);
             }
 
             @Override
@@ -88,6 +94,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

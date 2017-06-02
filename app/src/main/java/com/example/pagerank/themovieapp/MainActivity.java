@@ -81,24 +81,11 @@ public class MainActivity extends AppCompatActivity {
             public void onSearchAction(String currentQuery) {
                 String query=mSearchView.getQuery();
                 Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                mSearchView.clearQuery();
                 Intent i=new Intent(MainActivity.this,SearchableActivity.class);
                 i.putExtra("query",query);
                 startActivity(i);
-//                APIService.getMovieApi().getMovies(query).enqueue(new Callback<MovieList>() {
-//                    @Override
-//                    public void onResponse(Call<MovieList> call, Response<MovieList> response) {
-//                        movieList = response.body();
-//                        Log.d("check", "onResponse: "+ response.raw());
-//                        Log.e("Success", String.valueOf(movieList.getResults().size()));
-//                        recyclerView.setLayoutManager(new GridLayoutManager(GenreMovieList.this, 2));
-//                        recyclerView.setAdapter(new MovieListAdapter(movieList.getResults(),GenreMovieList.this));
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<MovieList> call, Throwable t) {
-//                        Log.e("Error", "error");
-//                    }
-//                });
+
 
             }
         });
