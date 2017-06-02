@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -27,10 +28,17 @@ import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
+import com.example.pagerank.themovieapp.adapters.MovieListAdapter;
+import com.example.pagerank.themovieapp.api.APIService;
 import com.example.pagerank.themovieapp.model.GenreType;
+import com.example.pagerank.themovieapp.model.MovieList;
 import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,8 +79,27 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSearchAction(String currentQuery) {
-                Toast.makeText(MainActivity.this, "SEARCH BUTTON PRESSED", Toast.LENGTH_SHORT).show();
-                mSearchView.clearQuery();
+                String query=mSearchView.getQuery();
+                Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(MainActivity.this,SearchableActivity.class);
+                i.putExtra("query",query);
+                startActivity(i);
+//                APIService.getMovieApi().getMovies(query).enqueue(new Callback<MovieList>() {
+//                    @Override
+//                    public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+//                        movieList = response.body();
+//                        Log.d("check", "onResponse: "+ response.raw());
+//                        Log.e("Success", String.valueOf(movieList.getResults().size()));
+//                        recyclerView.setLayoutManager(new GridLayoutManager(GenreMovieList.this, 2));
+//                        recyclerView.setAdapter(new MovieListAdapter(movieList.getResults(),GenreMovieList.this));
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<MovieList> call, Throwable t) {
+//                        Log.e("Error", "error");
+//                    }
+//                });
+
             }
         });
 
